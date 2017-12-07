@@ -4,7 +4,11 @@
   "description": "Redux generator",
   "main": "index.js",
   "scripts": {
+    "rx": "./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "rx": "./src/index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,14 @@
   "bugs": {
     "url": "https://github.com/skmail/reduxor/issues"
   },
-  "homepage": "https://github.com/skmail/reduxor#readme"
+  "homepage": "https://github.com/skmail/reduxor#readme",
+  "dependencies": {
+    "commander": "2.12.2",
+    "lodash": "4.17.4"
+  },
+  "devDependencies": {
+    "eslint": "4.12.1",
+    "eslint-config-airbnb-base": "12.1.0",
+    "eslint-plugin-import": "2.8.0"
+  }
 }
