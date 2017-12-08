@@ -1,8 +1,8 @@
-import {combineReducers} from 'redux'
-//***REDUCER_IMPORTS***
+import { combineReducers } from 'redux';
+// ##REDUCER_IMPORTS##
 
 const rootReducer = combineReducers({
-//***REDUCER_KEY***
+// ##REDUCER_KEY##
 });
 
-export default rootReducer
+export default rootReducer;

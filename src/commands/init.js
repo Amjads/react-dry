@@ -14,7 +14,9 @@ const initializeStore = () => mkdir(paths.cwd('store')).then(() => (
   ])
 ));
 
-const initializeReducers = () => mkdir(paths.cwd('actions')).then(() => readAndCopy(paths.stubs('reducers/index.stub'), paths.cwd('reducers/index.js')));
+const initializeReducers = () => mkdir(paths.cwd('actions'))
+  .then(() => (
+    readAndCopy(paths.stubs('reducers/index.stub'), paths.cwd('reducers/index.js'))));
 
 
 const store = () => {
