@@ -1,0 +1,31 @@
+{
+  "name": "reduxor",
+  "version": "1.0.0",
+  "description": "Redux generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "rx": "src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skmail/reduxor.git"
+  },
+  "author": "Solaiman Kmail <psokmail@gmail.com> (http://codeiin.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skmail/reduxor/issues"
+  },
+  "homepage": "https://github.com/skmail/reduxor#readme",
+  "dependencies": {
+    "commander": "2.12.2",
+    "lodash.template": "4.4.0"
+  },
+  "devDependencies": {
+    "eslint": "4.12.1",
+    "eslint-config-airbnb-base": "12.1.0",
+    "eslint-plugin-import": "2.8.0"
+  }
+}
