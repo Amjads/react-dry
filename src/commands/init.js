@@ -20,14 +20,13 @@ const initializeReducers = () => mkdir(paths.cwd('actions'))
 
 
 const store = () => {
-  // const packages = ['redux', 'react-redux', 'redux-thunk', 'redux-logger'];
-  // npm.install(...packages).then(() => (
-  //
-  // ));
-  initializeStore()
-    .then(initializeReducers)
-    .then(() => mkdir(paths.cwd('reducers')))
-    .then(() => mkdir(paths.cwd('middleware')));
+  const packages = ['redux', 'react-redux', 'redux-thunk', 'redux-logger'];
+  npm.install(...packages).then(() => (
+    initializeStore()
+      .then(initializeReducers)
+      .then(() => mkdir(paths.cwd('reducers')))
+      .then(() => mkdir(paths.cwd('middleware')))
+  ));
 };
 
 

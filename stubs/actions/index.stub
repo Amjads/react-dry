@@ -1,0 +1,12 @@
+import actionTypes from './types';
+<% actions.forEach(function(action) { %>import <%- action.name %> from './<%- action.file %>';
+<% }); %>
+
+// ##ACTION_IMPORTS##
+
+export default {
+  actionTypes,
+  <% actions.forEach(function(action) { %><%- action.name %>,
+  <% }); %>
+// ##ACTION_EXPORTS##
+};

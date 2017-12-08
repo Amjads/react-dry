@@ -1,0 +1,5 @@
+export default {
+<% actions.forEach(function(action) { %>  <%- action.typeName %>: '<%- action.typeValue %>',
+<% }); %>
+// ##ACTION_TYPE_EXPORTS##
+};

@@ -13,6 +13,7 @@ program
 program
   .command('make')
   .arguments('<name>')
+  .option('--api', 'Create async API call Actions')
   .description('Make REDUCER + ACTION')
   .action(make);
 

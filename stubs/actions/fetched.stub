@@ -1,0 +1,8 @@
+import types from './types';
+
+const <%- action.name %> = data => ({
+  type: types.<%- action.typeName %>,
+  data,
+});
+
+export default <%- action.name %>;
