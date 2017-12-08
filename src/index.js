@@ -1,21 +1,20 @@
 #!/usr/bin/env node
 
 const program = require('commander');
-const store = require('./commands/store')
-const make = require('./commands/make')
+const init = require('./commands/init');
+const make = require('./commands/make');
 
 
 program
-    .command('init')
-    .description("Initialize Redux store")
-    .action(store);
-
+  .command('init')
+  .description('Initialize Redux store')
+  .action(init);
 
 program
-    .command('make')
-    .arguments('<name>')
-    .description("Make REDUCER + ACTION")
-    .action(make);
+  .command('make')
+  .arguments('<name>')
+  .description('Make REDUCER + ACTION')
+  .action(make);
 
 
 program.parse(process.argv);
