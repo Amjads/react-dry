@@ -4,11 +4,10 @@
   "description": "Redux generator",
   "main": "index.js",
   "scripts": {
-    "rx": "./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "rx": "./src/index.js"
+    "rx": "src/index.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +21,11 @@
   "homepage": "https://github.com/skmail/reduxor#readme",
   "dependencies": {
     "commander": "2.12.2",
-    "lodash": "4.17.4"
+    "lodash.template": "4.4.0",
+    "react-redux": "5.0.6",
+    "redux": "3.7.2",
+    "redux-logger": "3.0.6",
+    "redux-thunk": "2.2.0"
   },
   "devDependencies": {
     "eslint": "4.12.1",
