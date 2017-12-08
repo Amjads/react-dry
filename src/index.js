@@ -2,12 +2,20 @@
 
 const program = require('commander');
 const store = require('./commands/store')
+const make = require('./commands/make')
 
 
 program
-    .command('make:store')
-    .description("Create redux store")
+    .command('init')
+    .description("Initialize Redux store")
     .action(store);
+
+
+program
+    .command('make')
+    .arguments('<name>')
+    .description("Make REDUCER + ACTION")
+    .action(make);
 
 
 program.parse(process.argv);

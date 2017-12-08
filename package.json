@@ -21,7 +21,7 @@
   "homepage": "https://github.com/skmail/reduxor#readme",
   "dependencies": {
     "commander": "2.12.2",
-    "lodash.template": "4.4.0",
+    "lodash.template": "4.4.0"
   },
   "devDependencies": {
     "eslint": "4.12.1",
