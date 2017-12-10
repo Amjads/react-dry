@@ -1,6 +1,12 @@
 const { spawn } = require('child_process');
 
 
+/**
+ * Install package through npm
+ *
+ * @param packages
+ * @return Promise
+ */
 const install = (...packages) => (
   new Promise((resolve, reject) => {
     console.log('running', 'npm', 'install', ...packages);

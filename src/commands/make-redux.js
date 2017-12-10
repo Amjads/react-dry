@@ -1,18 +1,10 @@
 const paths = require('../paths');
 const filesystem = require('../utils/filesystem');
-const template = require('lodash.template');
+const { readAndCopy } = require('../utils/helpers');
 const snakeCase = require('lodash.snakecase');
 const toUpper = require('lodash.toupper');
 const constants = require('../constants');
 
-const readAndCopy = (from, to, vars = {}) => (
-  filesystem
-    .read(from)
-    .then((data) => {
-      const compiledTemplate = template(data)(vars);
-      return filesystem.write(to, compiledTemplate);
-    })
-);
 
 const replaceCase = (action, reducerContent) => (
   filesystem
@@ -23,7 +15,7 @@ const replaceCase = (action, reducerContent) => (
 
 const appendToReducer = (name, action) => {
   const reducerFile = paths.cwd(`reducers/${name}.js`);
-  console.log(action.name)
+  console.log(action.name);
   return filesystem
     .read(reducerFile)
     .then(reducerContent => replaceCase(action, reducerContent.toString()))
@@ -33,7 +25,7 @@ const appendToReducer = (name, action) => {
       }
       return filesystem.write(reducerFile, reducerContent);
     })
-    .catch((er) => { });
+    .catch(() => { });
 };
 
 const make = (name, options) => {
@@ -43,7 +35,7 @@ const make = (name, options) => {
     paths.stubs('reducers/reducer.stub'),
     paths.cwd(`reducers/${name}.js`),
     {
-      actionName: name,
+      name,
     },
   );
 

@@ -1,5 +1,11 @@
 const fs = require('fs');
 
+/**
+ * Check if file exists
+ *
+ * @param path
+ * @return Promise
+ */
 const exists = path => new Promise((resolve, reject) => {
   fs.stat(path, (err, stat) => {
     if (err) {
@@ -10,6 +16,12 @@ const exists = path => new Promise((resolve, reject) => {
   });
 });
 
+/**
+ * Read file contents
+ *
+ * @param path
+ * @return Promise
+ */
 const read = path => new Promise((resolve, reject) => {
   fs.readFile(path, (err, data) => {
     if (err) {
@@ -20,6 +32,12 @@ const read = path => new Promise((resolve, reject) => {
   });
 });
 
+/**
+ * Check if file not exists
+ *
+ * @param path
+ * @return Promise
+ */
 const notExists = path => new Promise((resolve, reject) => {
   fs.stat(path, (err, stat) => {
     if (err) {
@@ -30,6 +48,13 @@ const notExists = path => new Promise((resolve, reject) => {
   });
 });
 
+/**
+ * Create a directory
+ *
+ * @param path
+ * @param mode
+ * @return Promise
+ */
 const mkdir = (path, mode) => new Promise((resolve, reject) => {
   fs.mkdir(path, mode, (err) => {
     if (err) {
@@ -40,6 +65,14 @@ const mkdir = (path, mode) => new Promise((resolve, reject) => {
   });
 });
 
+/**
+ * Write data to file
+ *
+ * @param file
+ * @param data
+ * @param options
+ * @return Promise
+ */
 const write = (file, data, options) => new Promise((resolve, reject) => {
   fs.writeFile(file, data, options, (err) => {
     if (err) {

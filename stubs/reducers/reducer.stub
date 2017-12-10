@@ -1,4 +1,4 @@
-import { actionTypes } from '../actions/customers';
+import { actionTypes } from '../actions/<%- name %>';
 
 const reducer = (state = {
 // ##REDUCER_STATE##
