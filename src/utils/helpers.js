@@ -1,4 +1,5 @@
 const filesystem = require('./filesystem');
+const template = require('lodash.template');
 
 const mkdir = path => (
   filesystem
@@ -16,16 +17,29 @@ const copyTo = (path, data) => {
 };
 
 
-const readAndCopy = (readFrom, dest) => (
+const readAndCopy = (readFrom, dest, vars = {}) => (
   filesystem
     .read(readFrom)
-    .then(data => copyTo(dest, data))
+    .then(data => copyTo(dest, template(data)(vars)))
     .catch(err => console.log(err))
 );
+
+const compose = (...funcs) => {
+  if (funcs.length === 0) {
+    return arg => arg;
+  }
+
+  if (funcs.length === 1) {
+    return funcs[0];
+  }
+
+  return funcs.reduce((a, b) => (...args) => a(b(...args)));
+};
 
 
 module.exports = {
   mkdir,
   copyTo,
   readAndCopy,
+  compose
 };

@@ -1,21 +1,28 @@
 #!/usr/bin/env node
 
 const program = require('commander');
-const init = require('./commands/init');
-const make = require('./commands/make');
+const initRedux = require('./commands/init-redux');
+const makeRedux = require('./commands/make-redux');
+const makeComponent = require('./commands/make-component');
 
 
 program
-  .command('init')
+  .command('init:redux')
   .description('Initialize Redux store')
-  .action(init);
+  .action(initRedux);
 
 program
-  .command('make')
+  .command('make:redux')
   .arguments('<name>')
   .option('--api', 'Create async API call Actions')
-  .description('Make REDUCER + ACTION')
-  .action(make);
+  .description('Make Redux REDUCER + ACTION')
+  .action(makeRedux);
 
+program
+  .command('make:component')
+  .arguments('<name>')
+  .option('-s, --stateless', 'Create Stateless Component')
+  .description('Create a component')
+  .action(makeComponent);
 
 program.parse(process.argv);

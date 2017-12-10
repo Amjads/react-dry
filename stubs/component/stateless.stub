@@ -1,0 +1,11 @@
+import React from 'react'
+
+import './style.css'
+
+const <%- componentName %> = ({...rest}) => (
+  <div>
+    Stateless <%- componentName %> Component
+  </div>
+)
+
+export default <%- componentName %>

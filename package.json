@@ -23,10 +23,14 @@
   "homepage": "https://github.com/skmail/react-dry#readme",
   "dependencies": {
     "commander": "2.12.2",
+    "lodash.camelcase": "4.3.0",
+    "lodash.capitalize": "4.2.1",
+    "lodash.kebabcase": "4.1.1",
     "lodash.snakecase": "4.1.1",
     "lodash.template": "4.4.0",
     "lodash.toupper": "4.1.2",
-    "lodash.uppercase": "4.3.0"
+    "lodash.uppercase": "4.3.0",
+    "lodash.upperfirst": "4.3.1"
   },
   "devDependencies": {
     "eslint": "4.12.1",
