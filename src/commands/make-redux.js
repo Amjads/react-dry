@@ -15,7 +15,6 @@ const replaceCase = (action, reducerContent) => (
 
 const appendToReducer = (name, action) => {
   const reducerFile = paths.cwd(`reducers/${name}.js`);
-  console.log(action.name);
   return filesystem
     .read(reducerFile)
     .then(reducerContent => replaceCase(action, reducerContent.toString()))
@@ -75,7 +74,6 @@ const make = (name, options) => {
     },
   );
 
-
   if (api) {
     let lastStubPromise;
     reducerFilePromise.then(() => {
@@ -95,12 +93,19 @@ const make = (name, options) => {
       });
     });
   }
-};
 
-module.exports = (...args) => {
-  console.log(paths.cwd('store'));
-  return filesystem.exists(paths.cwd('store/index.js')).then(() => make(...args)).catch((e) => {
-    console.log(e);
-    console.log('You have to Run "rx init" first');
+
+  reducerFilePromise.then(() => {
+    const reducerIndex = paths.cwd('reducers/index.js');
+    return filesystem
+      .read(reducerIndex)
+      .then(reducerContent => reducerContent.toString().replace(`${constants.REDUCER_KEY}`, `${name},\n  ${constants.REDUCER_KEY}`))
+      .then(reducerContent => reducerContent.replace(`${constants.REDUCER_IMPORT}`, `import ${name} from './${name}';\n${constants.REDUCER_IMPORT}`))
+      .then(reducerContent => filesystem.write(reducerIndex, reducerContent))
+      .catch((e) => { console.log("Hoops",e) });
   });
 };
+
+module.exports = (...args) => filesystem.exists(paths.cwd('store/index.js')).then(() => make(...args)).catch((e) => {
+  console.log('You have to Run "rx init:redux" first');
+});

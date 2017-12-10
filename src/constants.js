@@ -1,4 +1,6 @@
 module.exports = {
   REDUCER_STATE: '// ##REDUCER_CASE##',
   REDUCER_CASE: '// ##REDUCER_CASE##',
+  REDUCER_KEY: '// ##REDUCER_KEY##',
+  REDUCER_IMPORT: '// ##REDUCER_IMPORT##',
 };
