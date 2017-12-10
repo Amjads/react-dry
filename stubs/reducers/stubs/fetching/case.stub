@@ -1,0 +1,6 @@
+    case actionTypes.FETCHING:
+      return {
+        ...state,
+        fetched: false,
+        fetching: true,
+      };

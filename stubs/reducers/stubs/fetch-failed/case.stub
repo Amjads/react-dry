@@ -1,0 +1,6 @@
+    case actionTypes.FETCH_FAILED:
+      return {
+        ...state,
+        fetched: false,
+        fetching: false,
+      };

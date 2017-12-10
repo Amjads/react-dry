@@ -3,17 +3,43 @@ const filesystem = require('../utils/filesystem');
 const template = require('lodash.template');
 const snakeCase = require('lodash.snakecase');
 const toUpper = require('lodash.toupper');
+const constants = require('../constants');
 
-const readAndCopy = (from, to, vars = {}) => filesystem
-  .read(from)
-  .then((data) => {
-    const compiledTemplate = template(data)(vars);
-    return filesystem.write(to, compiledTemplate);
-  });
+const readAndCopy = (from, to, vars = {}) => (
+  filesystem
+    .read(from)
+    .then((data) => {
+      const compiledTemplate = template(data)(vars);
+      return filesystem.write(to, compiledTemplate);
+    })
+);
+
+const replaceCase = (action, reducerContent) => (
+  filesystem
+    .read(paths.stubs(`reducers/stubs/${action.file}/case.stub`))
+    .then(caseContent => reducerContent.replace(`    ${constants.REDUCER_CASE}`, `${caseContent.toString()}\n    ${constants.REDUCER_CASE}`))
+    .catch(() => {})
+);
+
+const appendToReducer = (name, action) => {
+  const reducerFile = paths.cwd(`reducers/${name}.js`);
+  console.log(action.name)
+  return filesystem
+    .read(reducerFile)
+    .then(reducerContent => replaceCase(action, reducerContent.toString()))
+    .then((reducerContent) => {
+      if (!reducerContent) {
+        return null;
+      }
+      return filesystem.write(reducerFile, reducerContent);
+    })
+    .catch((er) => { });
+};
 
 const make = (name, options) => {
   const api = options.api || false;
-  readAndCopy(
+
+  const reducerFilePromise = readAndCopy(
     paths.stubs('reducers/reducer.stub'),
     paths.cwd(`reducers/${name}.js`),
     {
@@ -59,15 +85,30 @@ const make = (name, options) => {
 
 
   if (api) {
-    apiActions.forEach((action) => {
-      readAndCopy(
-        paths.stubs(`actions/${action.file}.stub`),
-        paths.cwd(`actions/${name}/${action.file}.js`),
-        {
-          action,
-        },
-      );
+    let lastStubPromise;
+    reducerFilePromise.then(() => {
+      apiActions.forEach((action) => {
+        readAndCopy(
+          paths.stubs(`actions/${action.file}.stub`),
+          paths.cwd(`actions/${name}/${action.file}.js`),
+          {
+            action,
+          },
+        );
+        if (lastStubPromise) {
+          lastStubPromise = lastStubPromise.then(() => appendToReducer(name, action));
+        } else {
+          lastStubPromise = appendToReducer(name, action);
+        }
+      });
     });
   }
 };
-module.exports = make;
+
+module.exports = (...args) => {
+  console.log(paths.cwd('store'));
+  return filesystem.exists(paths.cwd('store/index.js')).then(() => make(...args)).catch((e) => {
+    console.log(e);
+    console.log('You have to Run "rx init" first');
+  });
+};

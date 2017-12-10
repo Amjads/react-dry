@@ -1,4 +1,5 @@
 const npm = require('../utils/npm');
+const filesystem = require('../utils/filesystem');
 const paths = require('../paths');
 
 const {
@@ -14,20 +15,23 @@ const initializeStore = () => mkdir(paths.cwd('store')).then(() => (
   ])
 ));
 
-const initializeReducers = () => mkdir(paths.cwd('actions'))
+const initializeReducers = () => mkdir(paths.cwd('reducers'))
   .then(() => (
     readAndCopy(paths.stubs('reducers/index.stub'), paths.cwd('reducers/index.js'))));
 
 
-const store = () => {
+const init = () => {
   const packages = ['redux', 'react-redux', 'redux-thunk', 'redux-logger'];
   npm.install(...packages).then(() => (
     initializeStore()
       .then(initializeReducers)
-      .then(() => mkdir(paths.cwd('reducers')))
+      .then(() => mkdir(paths.cwd('actions')))
       .then(() => mkdir(paths.cwd('middleware')))
   ));
 };
 
-
-module.exports = store;
+module.exports = (...args) => {
+  filesystem.notExists(paths.cwd('store/index.js')).then(() => init(...args)).catch(() => {
+    console.log('Redux already initialized on your app');
+  });
+};
