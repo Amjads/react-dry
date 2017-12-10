@@ -1,1 +1,1 @@
-# reduxor
+# React DRY(Don't Repeat your self)

@@ -1,5 +1,5 @@
 {
-  "name": "reduxor",
+  "name": "react-dry",
   "version": "1.0.0",
   "description": "Redux generator",
   "main": "index.js",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/skmail/reduxor.git"
+    "url": "git+https://github.com/skmail/react-dry.git"
   },
   "author": "Solaiman Kmail <psokmail@gmail.com> (http://codeiin.com/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/skmail/reduxor/issues"
+    "url": "https://github.com/skmail/react-dry/issues"
   },
-  "homepage": "https://github.com/skmail/reduxor#readme",
+  "homepage": "https://github.com/skmail/react-dry#readme",
   "dependencies": {
     "commander": "2.12.2",
     "lodash.snakecase": "4.1.1",
