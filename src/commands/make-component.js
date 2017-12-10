@@ -5,41 +5,41 @@ const kebabCase = require('lodash.kebabcase');
 const camelCase = require('lodash.camelcase');
 const upperfirst = require('lodash.upperfirst');
 
-
 const componentsPath = paths.cwd('components');
+
+const getComponentType = (options = {}) => {
+  let componentType;
+  if (options.hoc && options.stateless) {
+    componentType = 'hoc-stateless';
+  } else if (options.hoc) {
+    componentType = 'hoc';
+  } else if (options.stateless) {
+    componentType = 'stateless';
+  } else {
+    componentType = 'component';
+  }
+  return componentType;
+};
 
 const make = (name, options) => {
   const componentPath = `${paths.cwd('components')}/${kebabCase(name)}`;
-  filesystem.notExists(componentsPath)
+  filesystem
+    .notExists(componentsPath)
     .then(() => filesystem.mkdir(componentsPath))
-    .catch(() => {
-    })
+    .catch(() => {})
     .then(() => filesystem.mkdir(componentPath))
-    .then(() => {
-      let componentType;
-      if (options.hoc && options.stateless) {
-        componentType = 'hoc-stateless';
-      } else if (options.hoc) {
-        componentType = 'hoc';
-      } else if (options.stateless) {
-        componentType = 'stateless';
-      } else {
-        componentType = 'component';
-      }
-      return readAndCopy(
-        paths.stubs(`component/${componentType}.stub`),
-        `${componentPath}/index.js`, {
-          componentName:
-            compose(upperfirst, camelCase, kebabCase)(name),
+    .then(() => (
+      readAndCopy(
+        paths.stubs(`component/${getComponentType(options)}.stub`),
+        `${componentPath}/index.js`,
+        {
+          componentName: compose(upperfirst, camelCase, kebabCase)(name),
         },
-      );
-    })
+      )
+    ))
     .then(() => {
       if (!options.hoc) {
-        return readAndCopy(
-          paths.stubs('component/style.css'),
-          `${componentPath}/style.css`,
-        );
+        return readAndCopy(paths.stubs('component/style.css'), `${componentPath}/style.css`);
       }
       return null;
     });
