@@ -22,6 +22,7 @@ program
   .command('make:component')
   .arguments('<name>')
   .option('-s, --stateless', 'Create Stateless Component')
+  .option('-h, --hoc', 'Create Higher order component - HOC')
   .description('Create a component')
   .action(makeComponent);
 

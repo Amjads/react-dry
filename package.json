@@ -1,7 +1,7 @@
 {
   "name": "react-dry",
   "version": "1.0.0",
-  "description": "Redux generator",
+  "description": "React Generator",
   "main": "index.js",
   "scripts": {
     "test": "jest",
